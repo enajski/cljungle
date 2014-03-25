@@ -46,13 +46,13 @@
 (def snare1
     (sample (freesound-path 26900)))
 
-(defn pucita [time]
+(defn pucita [time interval]
     (at (+ 0 time) ((random-amen)))
-    (at (+ 200 time) (closedhihat))
-    (at (+ 400 time) ((random-amen)))
-    (apply-at (+ 600 time) pucita (+ 600 time) []))
+    (at (+ interval time) (closedhihat))
+    (at (+ (* 2 interval) time) ((random-amen)))
+    (apply-at (+ (* 3 interval) time) pucita (+ (* 3 interval) time) [interval]))
 
-; (pucita (now))
+; (pucita (now) 100)
 
 ; (stop)
 
