@@ -62,7 +62,7 @@
 
 (defn play-sequence [interval sounds]
     (at 0 ((first sounds)))
-    (apply-at (+ interval (now)) playsequence (+ interval (now)) [interval (rest sounds)]))
+    (apply-at (+ interval (now)) play-sequence [interval (rest sounds)]))
 
 (def sequence1 (reduce into [pucitaci cita cita cita cita tatatata]))
 (def sequence2 (reduce into [taa cita taa cita tatatata cita cita]))
