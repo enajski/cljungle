@@ -29,12 +29,30 @@
     :Bassstab           26878})
 
 (def amen-samples
-    (doall (map (fn [id] (freesound-sample id)) (vals AMENZ))))
-
-; (def puputa (doall (map (fn [id] (freesound-sample id)) [26885 26885 26900])))
+    (doall (map (fn [id] (sample (freesound-path id))) (vals AMENZ))))
 
 (defn return-random [list]
     (nth list (rand-int (count list))))
 
 (defn random-amen []
     (return-random amen-samples))
+
+(def amenkick
+    (sample (freesound-path 26885)))
+
+(def closedhihat
+    (sample (freesound-path 26879)))
+
+(def snare1
+    (sample (freesound-path 26900)))
+
+(defn pucita [time]
+    (at (+ 0 time) ((random-amen)))
+    (at (+ 200 time) (closedhihat))
+    (at (+ 400 time) ((random-amen)))
+    (apply-at (+ 600 time) pucita (+ 600 time) []))
+
+; (pucita (now))
+
+; (stop)
+
