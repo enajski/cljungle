@@ -49,23 +49,25 @@
 (def semisnare1
     (sample (freesound-path 26896)))
 
+(def taa [snare1 semisnare1])
 (def cita [closedhihat1 semisnare1])
 (def pucitaci [amenkick closedhihat1 snare1 closedhihat1])
 (def tatatata [snare1 snare1 snare1 snare1])
 
-(defn pucita [time interval]
-    (at (+    0           time) (amenkick))
-    (at (+ (* 1 interval) time) ((random-amen)))
-    (at (+ (* 2 interval) time) (snare1))
-    (apply-at (+ (* 3 interval) time) pucita (+ (* 3 interval) time) [interval]))
+; (defn pucita [time interval]
+;     (at (+    0           time) (amenkick))
+;     (at (+ (* 1 interval) time) ((random-amen)))
+;     (at (+ (* 2 interval) time) (snare1))
+;     (apply-at (+ (* 3 interval) time) pucita (+ (* 3 interval) time) [interval]))
 
-(defn play-sequence [time interval sounds]
+(defn play-sequence [interval sounds]
     (at 0 ((first sounds)))
-    (apply-at (+ interval time) playsequence (+ interval time) [interval (rest sounds)]))
+    (apply-at (+ interval (now)) playsequence (+ interval (now)) [interval (rest sounds)]))
 
 (def sequence1 (reduce into [pucitaci cita cita cita cita tatatata]))
+(def sequence2 (reduce into [taa cita taa cita tatatata cita cita]))
 
-; (playsequence (now) 100 sequence1)
+; (play-sequence 100 (reduce into [sequence1 sequence2]))
 
 ; (stop)
 
