@@ -60,9 +60,9 @@
 ;     (at (+ (* 2 interval) time) (snare1))
 ;     (apply-at (+ (* 3 interval) time) pucita (+ (* 3 interval) time) [interval]))
 
-(defn play-sequence [interval sounds]
-    (at 0 ((first sounds)))
-    (apply-at (+ interval (now)) play-sequence [interval (rest sounds)]))
+(defn play-sequence [interval [first-sound & others]]
+    (at 0 (first-sound))
+    (apply-at (+ interval (now)) play-sequence [interval others])))
 
 (def sequence1 (reduce into [pucitaci cita cita cita cita tatatata]))
 (def sequence2 (reduce into [taa cita taa cita tatatata cita cita]))
