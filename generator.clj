@@ -15,6 +15,6 @@
 
 (defn mix-composed-with-random [random-notes composed random]
   (into []
-        (conj
-          (into [] (take (* 2 random-notes) (shuffle composed)))
-          (into [] (take random-notes random)))))
+        (concat
+          (take 4 composed)
+          (take random-notes random))))
