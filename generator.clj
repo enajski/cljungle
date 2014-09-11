@@ -12,3 +12,9 @@
 (def notes [pu ci ta ty])
 
 (defn random-note [] (return-random notes))
+
+(defn mix-composed-with-random [random-notes composed random]
+  (into []
+        (conj
+          (into [] (take (* 2 random-notes) (shuffle composed)))
+          (into [] (take random-notes random)))))

@@ -2,6 +2,13 @@
   (:require [cljungle.generator :refer :all]
             [cljungle.sequences :refer :all]))
 
-(play-sequence 100 (into [] (take 64 (repeatedly #(random-note)))))
+(defn play-randomly [how-much]
+  (into [] (take how-much (repeatedly #(random-note)))))
 
-(play-sequence 80 (reduce into [sequence1 sequence2 sequence3]))
+(defn play-sequentially []
+  (reduce into [sequence1 sequence2 sequence3]))
+
+(play-sequence 100
+  (mix-composed-with-random (* 2 2 128)
+    (play-sequentially)
+    (play-randomly 1)))
